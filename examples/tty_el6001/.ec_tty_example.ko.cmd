@@ -1,0 +1,1 @@
+cmd_/home/cnc/ethercat/examples/tty_el6001/ec_tty_example.ko := ld -r -m elf_x86_64  -z max-page-size=0x200000 -T /usr/src/linux-headers-4.19.0-12-common-rt/scripts/module-common.lds  --build-id  -o /home/cnc/ethercat/examples/tty_el6001/ec_tty_example.ko /home/cnc/ethercat/examples/tty_el6001/ec_tty_example.o /home/cnc/ethercat/examples/tty_el6001/ec_tty_example.mod.o ;  true

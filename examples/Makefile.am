@@ -62,6 +62,7 @@ DIST_SUBDIRS = \
 	rtai_rtdm \
 	rtai_rtdm_dc \
 	tty \
+	tty_el6001 \
 	user \
 	xenomai \
 	xenomai_posix

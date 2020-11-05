@@ -1,8 +1,12 @@
 #------------------------------------------------------------------------------
 #
+#  Makefile.am
+#
+#  IgH EtherCAT master module
+#
 #  $Id$
 #
-#  Copyright (C) 2006-2012  Florian Pose, Ingenieurgemeinschaft IgH
+#  Copyright (C) 2006-2008  Florian Pose, Ingenieurgemeinschaft IgH
 #
 #  This file is part of the IgH EtherCAT Master.
 #
@@ -25,18 +29,27 @@
 #  EtherCAT technology and brand is only permitted in compliance with the
 #  industrial property and similar rights of Beckhoff Automation GmbH.
 #
-#  vi: syntax=make
-#
 #------------------------------------------------------------------------------
 
-obj-m := mini/
+noinst_HEADERS = \
+	serial.c \
+	serial.h \
+	tty.c
 
-ifeq (@ENABLE_TTY@,1)
-	obj-m += tty/ tty_el6001/
-endif
+EXTRA_DIST = \
+	Kbuild.in
 
-ifeq (@ENABLE_RTAI@,1)
-	obj-m += rtai/ dc_rtai/
-endif
+BUILT_SOURCES = \
+	Kbuild
+
+modules:
+	$(MAKE) -C "$(LINUX_SOURCE_DIR)" M="@abs_srcdir@" modules
+
+modules_install:
+	$(MAKE) -C "$(LINUX_SOURCE_DIR)" M="@abs_srcdir@" \
+		INSTALL_MOD_DIR="$(INSTALL_MOD_DIR)" modules_install
+
+clean-local:
+	$(MAKE) -C "$(LINUX_SOURCE_DIR)" M="@abs_srcdir@" clean
 
 #------------------------------------------------------------------------------
